@@ -19,26 +19,6 @@
         }
         .header h1 { font-size: 20px; font-weight: 500; }
         .header .subtitle { font-size: 13px; opacity: 0.7; margin-top: 4px; }
-        .nav-tabs {
-            display: flex;
-            background: white;
-            border-bottom: 1px solid #e8e8e8;
-            padding: 0 24px;
-        }
-        .nav-tab {
-            padding: 14px 28px;
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-            font-size: 14px;
-            color: #666;
-            transition: all 0.3s;
-        }
-        .nav-tab:hover { color: #2d3561; }
-        .nav-tab.active {
-            color: #2d3561;
-            border-bottom-color: #2d3561;
-            font-weight: 500;
-        }
         .sub-nav {
             display: flex;
             background: white;
@@ -47,7 +27,7 @@
             border-bottom: 1px solid #e8e8e8;
         }
         .sub-tab {
-            padding: 6px 16px;
+            padding: 6px 20px;
             border-radius: 4px;
             cursor: pointer;
             font-size: 13px;
@@ -56,147 +36,85 @@
             transition: all 0.3s;
         }
         .sub-tab:hover { background: #e8eaf6; color: #2d3561; }
-        .sub-tab.active {
-            background: #2d3561;
-            color: white;
-        }
+        .sub-tab.active { background: #2d3561; color: white; }
         .content { padding: 20px 24px; max-width: 1400px; margin: 0 auto; }
         .page { display: none; }
         .page.active { display: block; }
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 20px;
-        }
-        .kpi-card {
+
+        /* KPI Cards */
+        .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+        .kpi-card { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+        .kpi-card .label { font-size: 12px; color: #888; margin-bottom: 8px; }
+        .kpi-card .value { font-size: 28px; font-weight: 700; color: #1a1a1a; line-height: 1.2; }
+        .kpi-card .unit { font-size: 13px; color: #888; font-weight: normal; margin-left: 3px; }
+        .kpi-card .change { font-size: 12px; margin-top: 6px; }
+        .kpi-card .up { color: #52c41a; }
+        .kpi-card .down { color: #ff4d4f; }
+        .kpi-card .sub-info { font-size: 11px; color: #aaa; margin-top: 4px; }
+
+        /* Usage Stats Cards */
+        .usage-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 20px; }
+        .usage-card {
             background: white;
             border-radius: 8px;
-            padding: 20px;
+            padding: 16px;
             box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            border-top: 3px solid #e8e8e8;
         }
-        .kpi-card .label {
-            font-size: 13px;
-            color: #888;
-            margin-bottom: 8px;
-        }
-        .kpi-card .value {
-            font-size: 26px;
-            font-weight: 600;
-            color: #1a1a1a;
-        }
-        .kpi-card .unit {
-            font-size: 13px;
-            color: #999;
-            margin-left: 4px;
-        }
-        .kpi-card .change {
-            font-size: 12px;
-            margin-top: 6px;
-        }
-        .kpi-card .change.up { color: #52c41a; }
-        .kpi-card .change.down { color: #ff4d4f; }
-        .chart-card {
-            background: white;
-            border-radius: 8px;
-            padding: 16px 20px;
-            margin-bottom: 16px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-        }
-        .chart-title {
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 12px;
-            color: #1a1a1a;
-        }
+        .usage-card.cpu { border-top-color: #5470c6; }
+        .usage-card.gpu { border-top-color: #fac858; }
+        .usage-card.storage { border-top-color: #91cc75; }
+        .usage-card.saas { border-top-color: #ee6666; }
+        .usage-card.network { border-top-color: #73c0de; }
+        .usage-card .cat-name { font-size: 13px; font-weight: 600; color: #333; margin-bottom: 10px; }
+        .usage-card .stat-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+        .usage-card .stat-label { font-size: 11px; color: #999; }
+        .usage-card .stat-value { font-size: 15px; font-weight: 600; color: #1a1a1a; }
+        .usage-card .stat-unit { font-size: 11px; color: #888; }
+        .usage-card .top-type { margin-top: 8px; padding-top: 8px; border-top: 1px solid #f0f0f0; font-size: 11px; color: #666; }
+        .usage-card .top-type .top-name { color: #2d3561; font-weight: 500; }
+
+        /* Charts */
+        .chart-card { background: white; border-radius: 8px; padding: 16px 20px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+        .chart-title { font-size: 14px; font-weight: 500; margin-bottom: 12px; color: #1a1a1a; }
         .chart { height: 280px; }
-        .chart-large { height: 360px; }
-        .chart-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
+        .chart-large { height: 340px; }
+        .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        /* Section */
         .section-title {
-            font-size: 15px;
-            font-weight: 500;
-            margin: 24px 0 16px;
-            padding-left: 8px;
+            font-size: 14px; font-weight: 600;
+            margin: 20px 0 12px;
+            padding-left: 10px;
             border-left: 3px solid #2d3561;
             color: #1a1a1a;
         }
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12px;
-        }
-        .data-table th, .data-table td {
-            padding: 10px 12px;
-            text-align: left;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        .data-table th {
-            background: #fafafa;
-            font-weight: 500;
-            color: #666;
-        }
+
+        /* Table */
+        .data-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        .data-table th, .data-table td { padding: 9px 12px; text-align: left; border-bottom: 1px solid #f0f0f0; }
+        .data-table th { background: #fafafa; font-weight: 500; color: #666; }
         .data-table tr:hover { background: #fafafa; }
-        .data-table .num { text-align: right; font-family: 'SF Mono', monospace; }
-        .tag {
-            display: inline-block;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-size: 11px;
-        }
+        .data-table .num { text-align: right; font-family: monospace; }
+        .tag { display: inline-block; padding: 2px 7px; border-radius: 3px; font-size: 11px; }
         .tag-blue { background: #e6f7ff; color: #1890ff; }
         .tag-green { background: #f6ffed; color: #52c41a; }
         .tag-orange { background: #fff7e6; color: #fa8c16; }
-        .slider-container { margin: 16px 0; }
-        .slider-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 12px;
-            padding: 8px 0;
-        }
-        .slider-label {
-            width: 100px;
-            font-size: 13px;
-            color: #666;
-        }
-        .slider {
-            flex: 1;
-            margin: 0 12px;
-            -webkit-appearance: none;
-            height: 4px;
-            border-radius: 2px;
-            background: #e8e8e8;
-            outline: none;
-        }
-        .slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: #2d3561;
-            cursor: pointer;
-        }
-        .slider-value {
-            width: 60px;
-            text-align: right;
-            font-size: 13px;
-            font-weight: 500;
-            color: #2d3561;
-        }
+
+        /* Sliders */
+        .slider-container { margin: 12px 0; }
+        .slider-row { display: flex; align-items: center; margin-bottom: 10px; padding: 6px 0; }
+        .slider-label { width: 100px; font-size: 13px; color: #666; }
+        .slider { flex:1; margin: 0 12px; -webkit-appearance:none; height:4px; border-radius:2px; background:#e8e8e8; outline:none; }
+        .slider::-webkit-slider-thumb { -webkit-appearance:none; width:16px; height:16px; border-radius:50%; background:#2d3561; cursor:pointer; }
+        .slider-value { width:60px; text-align:right; font-size:13px; font-weight:600; color:#2d3561; }
     </style>
 </head>
 <body>
     <div class="header">
-        <div>
-            <h1>大社区技术成本 Dashboard · FY26</h1>
-            <div class="subtitle">推荐场景 | 数据更新至 2026-02-28</div>
-        </div>
+        <h1>大社区技术成本 Dashboard · FY26</h1>
+        <div class="subtitle">推荐场景 | 数据更新至 2026-02-28</div>
     </div>
-
-    <!-- 单一场景：推荐 -->
 
     <div class="sub-nav">
         <div class="sub-tab active" data-page="budget">① 预实对比</div>
@@ -205,36 +123,38 @@
     </div>
 
     <div class="content">
+
+        <!-- ① 预实对比 -->
         <div class="page active" id="page-budget">
             <div class="kpi-grid">
                 <div class="kpi-card">
-                    <div class="label">全年预算（剔税）</div>
-                    <div class="value">10.30<span class="unit">亿元</span></div>
+                    <div class="label">全年预算（推荐·剔税）</div>
+                    <div class="value">10,303.7<span class="unit">万元</span></div>
                 </div>
                 <div class="kpi-card">
                     <div class="label">YTD 实际（剔税）</div>
-                    <div class="value">1.63<span class="unit">亿元</span></div>
-                    <div class="change down">-7.74% 环比</div>
+                    <div class="value">1,625.9<span class="unit">万元</span></div>
+                    <div class="change down">▼ 7.74% 环比</div>
                 </div>
                 <div class="kpi-card">
                     <div class="label">预算执行率</div>
-                    <div class="value">15.78%</div>
-                    <div class="change">时间进度 16.67%</div>
+                    <div class="value">15.78<span class="unit">%</span></div>
+                    <div class="sub-info">时间进度 16.67%</div>
                 </div>
                 <div class="kpi-card">
-                    <div class="label">预计全年</div>
-                    <div class="value">9.76<span class="unit">亿元</span></div>
-                    <div class="change up">-5.28% 预算偏差</div>
+                    <div class="label">预计全年（按当前趋势）</div>
+                    <div class="value">9,756<span class="unit">万元</span></div>
+                    <div class="change up">▲ 低于预算 5.3%</div>
                 </div>
             </div>
 
             <div class="chart-row">
                 <div class="chart-card">
-                    <div class="chart-title">月度预算 vs 实际金额</div>
+                    <div class="chart-title">月度预算 vs 实际（万元，剔税）</div>
                     <div class="chart" id="chart-monthly"></div>
                 </div>
                 <div class="chart-card">
-                    <div class="chart-title">效率趋势 (元/万DAU)</div>
+                    <div class="chart-title">效率趋势（元/DAU）</div>
                     <div class="chart" id="chart-efficiency"></div>
                 </div>
             </div>
@@ -245,106 +165,322 @@
                     <thead>
                         <tr>
                             <th>月份</th>
-                            <th>预算（亿元）</th>
-                            <th>实际（亿元）</th>
-                            <th>执行率</th>
-                            <th>环比</th>
-                            <th>DAU（亿）</th>
-                            <th>单DAU成本（元）</th>
+                            <th class="num">预算（万元）</th>
+                            <th class="num">实际（万元）</th>
+                            <th class="num">执行率</th>
+                            <th class="num">环比</th>
+                            <th class="num">DAU（亿）</th>
+                            <th class="num">单DAU成本（元）</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>1月</td><td class="num">0.75</td><td class="num">0.85</td><td class="num">112.94%</td><td class="num">-</td><td class="num">1.72</td><td class="num">0.49</td></tr>
-                        <tr><td>2月</td><td class="num">0.77</td><td class="num">0.78</td><td class="num">101.11%</td><td class="num down">-7.74%</td><td class="num">1.76</td><td class="num">0.44</td></tr>
+                        <tr>
+                            <td>1月</td>
+                            <td class="num">748.8</td>
+                            <td class="num">845.7</td>
+                            <td class="num">112.94%</td>
+                            <td class="num">-</td>
+                            <td class="num">1.72</td>
+                            <td class="num">0.49</td>
+                        </tr>
+                        <tr>
+                            <td>2月</td>
+                            <td class="num">771.6</td>
+                            <td class="num">780.2</td>
+                            <td class="num">101.11%</td>
+                            <td class="num down">▼ 7.74%</td>
+                            <td class="num">1.76</td>
+                            <td class="num">0.44</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
+        <!-- ② 用量分析 -->
         <div class="page" id="page-usage">
+
             <div class="section-title">A · 总览</div>
+
+            <!-- 总览 KPI -->
+            <div class="kpi-grid" style="grid-template-columns: repeat(3,1fr); margin-bottom:16px;">
+                <div class="kpi-card">
+                    <div class="label">YTD 总用量金额（含税）</div>
+                    <div class="value">19,351.7<span class="unit">万元</span></div>
+                    <div class="sub-info">1月 9,544.3万 + 2月 9,807.4万</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">1月 单日用量金额</div>
+                    <div class="value">312.9<span class="unit">万元</span></div>
+                    <div class="sub-info">× 30.5天 ≈ 9,544.3万/月</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">2月 单日用量金额</div>
+                    <div class="value">321.6<span class="unit">万元</span></div>
+                    <div class="sub-info">× 30.5天 ≈ 9,807.4万/月</div>
+                </div>
+            </div>
+
+            <!-- 各品类数字卡片 -->
+            <div class="usage-grid">
+                <div class="usage-card cpu">
+                    <div class="cat-name">🖥 CPU</div>
+                    <div class="stat-row">
+                        <span class="stat-label">月均金额</span>
+                        <span class="stat-value">5,104<span class="stat-unit"> 万元</span></span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">占比</span>
+                        <span class="stat-value">52.7<span class="stat-unit"> %</span></span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">环比</span>
+                        <span class="stat-value down">▼ 4.0%</span>
+                    </div>
+                    <div class="top-type">最大类型：<span class="top-name">Lambda 2,420.6万</span></div>
+                </div>
+                <div class="usage-card gpu">
+                    <div class="cat-name">🎮 GPU</div>
+                    <div class="stat-row">
+                        <span class="stat-label">月均金额</span>
+                        <span class="stat-value">1,621<span class="stat-unit"> 万元</span></span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">占比</span>
+                        <span class="stat-value">16.8<span class="stat-unit"> %</span></span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">环比</span>
+                        <span class="stat-value up">▲ 0.9%</span>
+                    </div>
+                    <div class="top-type">最大类型：<span class="top-name">L20 2,035.7万</span></div>
+                </div>
+                <div class="usage-card storage">
+                    <div class="cat-name">💾 存储</div>
+                    <div class="stat-row">
+                        <span class="stat-label">月均金额</span>
+                        <span class="stat-value">1,025<span class="stat-unit"> 万元</span></span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">占比</span>
+                        <span class="stat-value">10.6<span class="stat-unit"> %</span></span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">环比</span>
+                        <span class="stat-value down">▼ 0.3%</span>
+                    </div>
+                    <div class="top-type">最大类型：<span class="top-name">标准存储 1,222.1万</span></div>
+                </div>
+                <div class="usage-card saas">
+                    <div class="cat-name">☁️ 其他SAAS</div>
+                    <div class="stat-row">
+                        <span class="stat-label">月均金额</span>
+                        <span class="stat-value">1,684<span class="stat-unit"> 万元</span></span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">占比</span>
+                        <span class="stat-value">17.4<span class="stat-unit"> %</span></span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">环比</span>
+                        <span class="stat-value down">▼ 33.2%</span>
+                    </div>
+                    <div class="top-type">最大类型：<span class="top-name">花果山 2,022.6万</span></div>
+                </div>
+                <div class="usage-card network">
+                    <div class="cat-name">🌐 网络</div>
+                    <div class="stat-row">
+                        <span class="stat-label">月均金额</span>
+                        <span class="stat-value">242<span class="stat-unit"> 万元</span></span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">占比</span>
+                        <span class="stat-value">2.5<span class="stat-unit"> %</span></span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">环比</span>
+                        <span class="stat-value down">▼ 8.1%</span>
+                    </div>
+                    <div class="top-type">最大类型：<span class="top-name">专线 481.8万</span></div>
+                </div>
+            </div>
+
             <div class="chart-row">
                 <div class="chart-card">
-                    <div class="chart-title">各组件成本占比</div>
+                    <div class="chart-title">各品类成本占比（万元，含税）</div>
                     <div class="chart" id="chart-pie"></div>
                 </div>
                 <div class="chart-card">
-                    <div class="chart-title">各组件月度趋势</div>
+                    <div class="chart-title">各品类月度趋势（万元）</div>
                     <div class="chart" id="chart-trend"></div>
                 </div>
             </div>
 
             <div class="section-title">B · CPU 用量分析</div>
+            <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr); margin-bottom:12px;">
+                <div class="kpi-card">
+                    <div class="label">CPU 合计金额</div>
+                    <div class="value">10,208.6<span class="unit">万元</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">1月金额</div>
+                    <div class="value">5,207.7<span class="unit">万元</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">2月金额</div>
+                    <div class="value">5,000.9<span class="unit">万元</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">最大成本类型</div>
+                    <div class="value" style="font-size:18px;">Lambda</div>
+                    <div class="sub-info">2,420.6万元 / 占CPU 23.7%</div>
+                </div>
+            </div>
             <div class="chart-card">
-                <div class="chart-title">CPU 各类型成本分布</div>
+                <div class="chart-title">CPU 各类型成本分布（万元）</div>
                 <div class="chart chart-large" id="chart-cpu"></div>
             </div>
 
             <div class="section-title">C · GPU 用量分析</div>
+            <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr); margin-bottom:12px;">
+                <div class="kpi-card">
+                    <div class="label">GPU 合计金额</div>
+                    <div class="value">3,242.8<span class="unit">万元</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">1月金额</div>
+                    <div class="value">1,614.5<span class="unit">万元</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">2月金额</div>
+                    <div class="value">1,628.3<span class="unit">万元</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">最大成本型号</div>
+                    <div class="value" style="font-size:18px;">L20</div>
+                    <div class="sub-info">2,035.7万元 / 占GPU 62.8%</div>
+                </div>
+            </div>
             <div class="chart-card">
-                <div class="chart-title">GPU 各型号成本分布</div>
-                <div class="chart chart-large" id="chart-gpu"></div>
+                <div class="chart-title">GPU 各型号成本分布（万元）</div>
+                <div class="chart" id="chart-gpu"></div>
             </div>
 
             <div class="section-title">D · 存储用量分析</div>
+            <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr); margin-bottom:12px;">
+                <div class="kpi-card">
+                    <div class="label">存储合计金额</div>
+                    <div class="value">2,049.3<span class="unit">万元</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">1月金额</div>
+                    <div class="value">1,026.4<span class="unit">万元</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">2月金额</div>
+                    <div class="value">1,022.9<span class="unit">万元</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">最大成本类型</div>
+                    <div class="value" style="font-size:18px;">标准存储</div>
+                    <div class="sub-info">1,222.1万元 / 占存储 59.6%</div>
+                </div>
+            </div>
             <div class="chart-card">
-                <div class="chart-title">存储类型成本分布</div>
+                <div class="chart-title">存储各类型成本分布（万元）</div>
                 <div class="chart" id="chart-storage"></div>
             </div>
 
             <div class="section-title">E · 其他 SAAS</div>
+            <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr); margin-bottom:12px;">
+                <div class="kpi-card">
+                    <div class="label">SAAS 合计金额</div>
+                    <div class="value">3,367.9<span class="unit">万元</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">1月金额</div>
+                    <div class="value">1,443.9<span class="unit">万元</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">2月金额</div>
+                    <div class="value">1,924.0<span class="unit">万元</span></div>
+                    <div class="change down">▼ 环比+33.2%</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">最大成本类型</div>
+                    <div class="value" style="font-size:18px;">花果山</div>
+                    <div class="sub-info">2,022.6万元 / 占SAAS 60.1%</div>
+                </div>
+            </div>
             <div class="chart-card">
-                <div class="chart-title">SAAS 服务成本 TOP10</div>
+                <div class="chart-title">SAAS 服务成本 TOP8（万元）</div>
                 <div class="chart chart-large" id="chart-saas"></div>
             </div>
 
-            <div class="section-title">F · 云盘</div>
-            <div class="chart-card">
-                <div class="chart-title">云盘类型成本分布</div>
-                <div class="chart" id="chart-disk"></div>
+            <div class="section-title">F · 网络</div>
+            <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr); margin-bottom:12px;">
+                <div class="kpi-card">
+                    <div class="label">网络合计金额</div>
+                    <div class="value">483.1<span class="unit">万元</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">1月金额</div>
+                    <div class="value">251.8<span class="unit">万元</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">2月金额</div>
+                    <div class="value">231.3<span class="unit">万元</span></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">最大成本类型</div>
+                    <div class="value" style="font-size:18px;">专线</div>
+                    <div class="sub-info">481.8万元 / 占网络 99.7%</div>
+                </div>
             </div>
-
-            <div class="section-title">G · 网络</div>
             <div class="chart-card">
-                <div class="chart-title">网络类型成本分布</div>
+                <div class="chart-title">网络各类型成本（万元）</div>
                 <div class="chart" id="chart-network"></div>
             </div>
         </div>
 
+        <!-- ③ 优化测算 -->
         <div class="page" id="page-optimize">
             <div class="chart-card">
-                <div class="chart-title">资源量调节器</div>
+                <div class="chart-title">资源量调节器（调整比例估算节省空间）</div>
                 <div class="slider-container">
                     <div class="slider-row">
-                        <div class="slider-label">CPU 利用率</div>
-                        <input type="range" class="slider" id="slider-cpu" min="50" max="100" value="75">
-                        <div class="slider-value" id="val-cpu">75%</div>
+                        <div class="slider-label">CPU 降本比例</div>
+                        <input type="range" class="slider" id="slider-cpu" min="0" max="30" value="10">
+                        <div class="slider-value" id="val-cpu">10%</div>
                     </div>
                     <div class="slider-row">
-                        <div class="slider-label">GPU 利用率</div>
-                        <input type="range" class="slider" id="slider-gpu" min="50" max="100" value="80">
-                        <div class="slider-value" id="val-gpu">80%</div>
+                        <div class="slider-label">GPU 降本比例</div>
+                        <input type="range" class="slider" id="slider-gpu" min="0" max="30" value="10">
+                        <div class="slider-value" id="val-gpu">10%</div>
                     </div>
                     <div class="slider-row">
-                        <div class="slider-label">存储压缩率</div>
-                        <input type="range" class="slider" id="slider-storage" min="0" max="50" value="20">
-                        <div class="slider-value" id="val-storage">20%</div>
+                        <div class="slider-label">存储降本比例</div>
+                        <input type="range" class="slider" id="slider-storage" min="0" max="30" value="10">
+                        <div class="slider-value" id="val-storage">10%</div>
                     </div>
                     <div class="slider-row">
-                        <div class="slider-label">网络优化</div>
-                        <input type="range" class="slider" id="slider-network" min="0" max="30" value="10">
-                        <div class="slider-value" id="val-network">10%</div>
+                        <div class="slider-label">SAAS 降本比例</div>
+                        <input type="range" class="slider" id="slider-saas" min="0" max="30" value="5">
+                        <div class="slider-value" id="val-saas">5%</div>
                     </div>
+                </div>
+                <div id="opt-result" style="margin-top:12px; padding:12px; background:#f6ffed; border-radius:6px; font-size:13px; color:#52c41a; font-weight:500;">
+                    预计节省：<span id="opt-save">1,103万元/月</span> | 优化后月度：<span id="opt-after">8,441万元</span>
                 </div>
             </div>
 
             <div class="chart-row">
                 <div class="chart-card">
-                    <div class="chart-title">3月预估</div>
+                    <div class="chart-title">3月预估对比（含税，万元）</div>
                     <div class="chart" id="chart-march"></div>
                 </div>
                 <div class="chart-card">
-                    <div class="chart-title">全年逐月模型</div>
+                    <div class="chart-title">全年逐月模型（含税，万元）</div>
                     <div class="chart chart-large" id="chart-year"></div>
                 </div>
             </div>
@@ -353,12 +489,13 @@
                 <div class="chart-title">优化方案对比</div>
                 <table class="data-table">
                     <thead>
-                        <tr><th>方案</th><th>预计节省</th><th>实施难度</th><th>预期效果</th></tr>
+                        <tr><th>方案</th><th class="num">预计节省</th><th>实施难度</th><th>预期效果</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><span class="tag tag-blue">CPU 混部优化</span></td><td class="num">0.10 亿元/月</td><td>低</td><td>提升利用率 15%</td></tr>
-                        <tr><td><span class="tag tag-green">GPU 共享调度</span></td><td class="num">0.05 亿元/月</td><td>中</td><td>减少闲置 20%</td></tr>
-                        <tr><td><span class="tag tag-orange">存储分层</span></td><td class="num">0.03 亿元/月</td><td>低</td><td>冷数据降本 30%</td></tr>
+                        <tr><td><span class="tag tag-blue">CPU 混部优化</span></td><td class="num">520万元/月</td><td>低</td><td>Lambda/Larc 利用率提升 10%</td></tr>
+                        <tr><td><span class="tag tag-orange">GPU 共享调度</span></td><td class="num">324万元/月</td><td>中</td><td>L20 闲置减少 10%</td></tr>
+                        <tr><td><span class="tag tag-green">存储分层</span></td><td class="num">122万元/月</td><td>低</td><td>标准存储冷数据降本 10%</td></tr>
+                        <tr><td><span class="tag tag-blue">SAAS 治理</span></td><td class="num">168万元/月</td><td>中</td><td>花果山/跟踪服务缩量 5%</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -366,194 +503,215 @@
     </div>
 
     <script>
-        // 数据基于技术 booklet 规则计算
-        // 预算：26年预算 sheet，剔税 = 含税 / 1.06
-        // 实际：26年技术成本 sheet，剔税 = 含税 / 1.06
-        const data = {
-            monthly: {
-                months: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
-                // 预算（剔税）：0.7488, 0.7716, 0.7920, 0.8132, 0.8333, 0.8536, 0.8763, 0.8949, 0.9034, 0.9235, 0.9390, 0.9541
-                budget: [0.75,0.77,0.79,0.81,0.83,0.85,0.88,0.89,0.90,0.92,0.94,0.95],
-                // 实际（剔税）：1月0.8457, 2月0.7802
-                actual: [0.85,0.78,null,null,null,null,null,null,null,null,null,null]
-            },
-            // 用量分析数据：天账单 R 列原始值 × 30.5天（中台含税口径）
-            components: {
-                names: ['CPU','GPU','存储','其他SAAS','网络'],
-                // 1月+2月实际合计（亿元）= 单日金额 × 30.5天
-                values: [1.02,0.32,0.20,0.34,0.05]
-            },
-            cpuTypes: {
-                names: ['Lambda','Larc','混部容器','RedKV','Kafka','Flink','Redis','通用型','计算型','EMR'],
-                values: [0.24,0.17,0.15,0.12,0.10,0.08,0.05,0.05,0.04,0.02]
-            },
-            gpuTypes: {
-                names: ['L20','H20','H20-141G','A10'],
-                values: [0.20,0.06,0.04,0.01]
-            },
-            storageTypes: {
-                names: ['标准存储','Kafka','增强型SSD','RedKV','基础盘','通用型SSD'],
-                values: [0.12,0.10,0.06,0.06,0.02,0.01]
-            },
-            saasTop: {
-                names: ['花果山','用户行为跟踪','Metrics指标','实验平台Racing','RocketMQ','可观测日志','Hologres'],
-                values: [0.20,0.08,0.03,0.01,0.01,0.01,0.00]
-            },
-            networkTypes: {
-                names: ['专线'],
-                values: [0.05]
-            }
+        // ======= 数据（万元，天账单 × 30.5天） =======
+        const BASE = {
+            cpu1: 5207.7, cpu2: 5000.9,
+            gpu1: 1614.5, gpu2: 1628.3,
+            sto1: 1026.4, sto2: 1022.9,
+            saa1: 1443.9, saa2: 1924.0,
+            net1: 251.8,  net2: 231.3
         };
+        const total1 = BASE.cpu1 + BASE.gpu1 + BASE.sto1 + BASE.saa1 + BASE.net1;
+        const total2 = BASE.cpu2 + BASE.gpu2 + BASE.sto2 + BASE.saa2 + BASE.net2;
 
-        // 记录哪些 Tab 已初始化图表
+        // ======= Tab 切换 + 懒加载 =======
         const initializedPages = {};
 
-        function initPageCharts(page) {
-            if (initializedPages[page]) {
-                // 已初始化过，只需 resize
-                echarts.getInstanceByDom(document.getElementById('chart-' + page + '-first')) && 
-                    document.querySelectorAll('.chart').forEach(el => {
-                        const inst = echarts.getInstanceByDom(el);
-                        if (inst) inst.resize();
-                    });
-                return;
-            }
-            initializedPages[page] = true;
-
-            if (page === 'budget') {
-                initBudgetCharts();
-            } else if (page === 'usage') {
-                initUsageCharts();
-            } else if (page === 'optimize') {
-                initOptimizeCharts();
-            }
-        }
-
-        function initBudgetCharts() {
-            echarts.init(document.getElementById('chart-monthly')).setOption({
-                tooltip:{trigger:'axis'},legend:{data:['预算','实际'],bottom:0},
-                grid:{left:'3%',right:'4%',bottom:'15%',top:'10%',containLabel:true},
-                xAxis:{type:'category',data:data.monthly.months},
-                yAxis:{type:'value',name:'亿元'},
-                series:[
-                    {name:'预算',type:'bar',data:data.monthly.budget,itemStyle:{color:'#91cc75'}},
-                    {name:'实际',type:'bar',data:data.monthly.actual,itemStyle:{color:'#5470c6'}}
-                ]
-            });
-            echarts.init(document.getElementById('chart-efficiency')).setOption({
-                tooltip:{trigger:'axis'},
-                grid:{left:'3%',right:'4%',bottom:'10%',top:'15%',containLabel:true},
-                xAxis:{type:'category',data:['1月','2月']},
-                yAxis:{type:'value',name:'元/DAU',min:0.4,max:0.6},
-                series:[{type:'line',data:[0.49,0.44],smooth:true,areaStyle:{color:'rgba(84,112,198,0.1)'},itemStyle:{color:'#5470c6'},lineStyle:{width:3}}]
-            });
-        }
-
-        function initUsageCharts() {
-            echarts.init(document.getElementById('chart-pie')).setOption({
-                tooltip:{trigger:'item',formatter:'{b}: {c}亿元 ({d}%)'},
-                legend:{orient:'vertical',right:10,top:'center',itemWidth:10,itemHeight:10},
-                series:[{type:'pie',radius:['40%','65%'],center:['35%','50%'],data:data.components.names.map((n,i)=>({name:n,value:data.components.values[i]})),itemStyle:{borderRadius:4,borderColor:'#fff',borderWidth:2},label:{show:false}}]
-            });
-            echarts.init(document.getElementById('chart-trend')).setOption({
-                tooltip:{trigger:'axis'},legend:{data:['CPU','GPU','存储','其他SAAS','网络'],bottom:0},
-                grid:{left:'3%',right:'4%',bottom:'20%',top:'10%',containLabel:true},
-                xAxis:{type:'category',data:['1月','2月']},yAxis:{type:'value',name:'亿元'},
-                series:[
-                    {name:'CPU',type:'line',smooth:true,data:[0.52,0.50]},
-                    {name:'GPU',type:'line',smooth:true,data:[0.16,0.16]},
-                    {name:'存储',type:'line',smooth:true,data:[0.10,0.10]},
-                    {name:'其他SAAS',type:'line',smooth:true,data:[0.14,0.19]},
-                    {name:'网络',type:'line',smooth:true,data:[0.03,0.02]}
-                ]
-            });
-            echarts.init(document.getElementById('chart-cpu')).setOption({
-                tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
-                grid:{left:'3%',right:'4%',bottom:'15%',top:'10%',containLabel:true},
-                xAxis:{type:'category',data:data.cpuTypes.names,axisLabel:{rotate:20}},yAxis:{type:'value',name:'亿元'},
-                series:[{type:'bar',data:data.cpuTypes.values,itemStyle:{color:'#5470c6'},barWidth:'60%'}]
-            });
-            echarts.init(document.getElementById('chart-gpu')).setOption({
-                tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
-                grid:{left:'3%',right:'4%',bottom:'10%',top:'10%',containLabel:true},
-                xAxis:{type:'category',data:data.gpuTypes.names},yAxis:{type:'value',name:'亿元'},
-                series:[{type:'bar',data:data.gpuTypes.values,itemStyle:{color:'#fac858'},barWidth:'50%'}]
-            });
-            echarts.init(document.getElementById('chart-storage')).setOption({
-                tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
-                grid:{left:'3%',right:'4%',bottom:'15%',top:'10%',containLabel:true},
-                xAxis:{type:'category',data:data.storageTypes.names,axisLabel:{rotate:20}},yAxis:{type:'value',name:'亿元'},
-                series:[{type:'bar',data:data.storageTypes.values,itemStyle:{color:'#91cc75'},barWidth:'60%'}]
-            });
-            echarts.init(document.getElementById('chart-saas')).setOption({
-                tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
-                grid:{left:'3%',right:'4%',bottom:'20%',top:'10%',containLabel:true},
-                xAxis:{type:'category',data:data.saasTop.names,axisLabel:{rotate:30}},yAxis:{type:'value',name:'亿元'},
-                series:[{type:'bar',data:data.saasTop.values,itemStyle:{color:'#91cc75'},barWidth:'60%'}]
-            });
-            echarts.init(document.getElementById('chart-disk')).setOption({
-                tooltip:{trigger:'item'},
-                series:[{type:'pie',radius:['40%','65%'],data:[{name:'标准存储',value:0.12},{name:'增强型SSD',value:0.06},{name:'基础盘',value:0.02},{name:'通用型SSD',value:0.01}],itemStyle:{borderRadius:4,borderColor:'#fff',borderWidth:2}}]
-            });
-            echarts.init(document.getElementById('chart-network')).setOption({
-                tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
-                grid:{left:'3%',right:'4%',bottom:'10%',top:'10%',containLabel:true},
-                xAxis:{type:'category',data:data.networkTypes.names},yAxis:{type:'value',name:'亿元'},
-                series:[{type:'bar',data:data.networkTypes.values,itemStyle:{color:'#ee6666'},barWidth:'50%'}]
-            });
-        }
-
-        function initOptimizeCharts() {
-            echarts.init(document.getElementById('chart-march')).setOption({
-                tooltip:{trigger:'axis'},
-                grid:{left:'3%',right:'4%',bottom:'10%',top:'15%',containLabel:true},
-                xAxis:{type:'category',data:['当前趋势','优化后']},yAxis:{type:'value',name:'亿元'},
-                series:[{type:'bar',data:[1.07,0.91],itemStyle:{color:p=>p.dataIndex===0?'#ee6666':'#91cc75'},barWidth:'50%'}]
-            });
-            echarts.init(document.getElementById('chart-year')).setOption({
-                tooltip:{trigger:'axis'},legend:{data:['预算','当前趋势','优化后'],bottom:0},
-                grid:{left:'3%',right:'4%',bottom:'15%',top:'10%',containLabel:true},
-                xAxis:{type:'category',data:data.monthly.months},yAxis:{type:'value',name:'亿元'},
-                series:[
-                    {name:'预算',type:'line',data:data.monthly.budget,lineStyle:{type:'dashed',color:'#999'},itemStyle:{color:'#999'}},
-                    {name:'当前趋势',type:'line',smooth:true,data:[1.02,1.07,1.07,1.07,1.07,1.07,1.07,1.07,1.07,1.07,1.07,1.07],itemStyle:{color:'#5470c6'}},
-                    {name:'优化后',type:'line',smooth:true,data:[1.02,1.07,0.91,0.91,0.91,0.91,0.91,0.91,0.91,0.91,0.91,0.91],itemStyle:{color:'#91cc75'}}
-                ]
-            });
-        }
-
-        document.querySelectorAll('.nav-tab').forEach(tab=>{
-            tab.addEventListener('click',()=>{
-                document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+        document.querySelectorAll('.sub-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
-            });
-        });
-
-        document.querySelectorAll('.sub-tab').forEach(tab=>{
-            tab.addEventListener('click',()=>{
-                document.querySelectorAll('.sub-tab').forEach(t=>t.classList.remove('active'));
-                tab.classList.add('active');
-                document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                 const page = tab.dataset.page;
-                document.getElementById('page-'+page).classList.add('active');
-                // 切换后初始化该 Tab 的图表
-                setTimeout(() => initPageCharts(page), 50);
+                document.getElementById('page-' + page).classList.add('active');
+                setTimeout(() => {
+                    if (!initializedPages[page]) {
+                        initializedPages[page] = true;
+                        if (page === 'usage') initUsageCharts();
+                        if (page === 'optimize') initOptimizeCharts();
+                    } else {
+                        document.querySelectorAll('.chart').forEach(el => {
+                            const inst = echarts.getInstanceByDom(el);
+                            if (inst) inst.resize();
+                        });
+                    }
+                }, 50);
             });
         });
 
-        ['cpu','gpu','storage','network'].forEach(type=>{
-            const s=document.getElementById('slider-'+type),v=document.getElementById('val-'+type);
-            s.addEventListener('input',()=>v.textContent=s.value+'%');
-        });
-
-        // 初始化第一个 Tab（预实对比）
-        initBudgetCharts();
-        window.addEventListener('resize', ()=>{
-            document.querySelectorAll('.chart').forEach(el=>{
+        window.addEventListener('resize', () => {
+            document.querySelectorAll('.chart').forEach(el => {
                 const inst = echarts.getInstanceByDom(el);
                 if (inst) inst.resize();
             });
         });
+
+        // ======= ① 预实对比图表 =======
+        function initBudgetCharts() {
+            // 月度预算 vs 实际
+            echarts.init(document.getElementById('chart-monthly')).setOption({
+                tooltip: { trigger: 'axis' },
+                legend: { data: ['预算', '实际'], bottom: 0 },
+                grid: { left: '3%', right: '4%', bottom: '15%', top: '8%', containLabel: true },
+                xAxis: { type: 'category', data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'] },
+                yAxis: { type: 'value', name: '万元' },
+                series: [
+                    { name: '预算', type: 'bar', data: [748.8,771.6,792.0,813.2,833.3,853.6,876.3,894.9,903.4,923.5,939.0,954.1], itemStyle: { color: '#91cc75' } },
+                    { name: '实际', type: 'bar', data: [845.7,780.2,null,null,null,null,null,null,null,null,null,null], itemStyle: { color: '#5470c6' } }
+                ]
+            });
+            // 效率趋势
+            echarts.init(document.getElementById('chart-efficiency')).setOption({
+                tooltip: { trigger: 'axis' },
+                grid: { left: '3%', right: '4%', bottom: '10%', top: '15%', containLabel: true },
+                xAxis: { type: 'category', data: ['1月', '2月'] },
+                yAxis: { type: 'value', name: '元/DAU', min: 0.35, max: 0.6 },
+                series: [{ type: 'line', data: [0.49, 0.44], smooth: true, areaStyle: { color: 'rgba(84,112,198,0.1)' }, itemStyle: { color: '#5470c6' }, lineStyle: { width: 3 }, label: { show: true } }]
+            });
+        }
+
+        // ======= ② 用量分析图表 =======
+        function initUsageCharts() {
+            // 饼图
+            echarts.init(document.getElementById('chart-pie')).setOption({
+                tooltip: { trigger: 'item', formatter: '{b}: {c}万元 ({d}%)' },
+                legend: { orient: 'vertical', right: 10, top: 'center' },
+                series: [{
+                    type: 'pie', radius: ['40%', '68%'], center: ['38%', '50%'],
+                    data: [
+                        { name: 'CPU', value: 10208.6 },
+                        { name: 'GPU', value: 3242.8 },
+                        { name: '其他SAAS', value: 3367.9 },
+                        { name: '存储', value: 2049.3 },
+                        { name: '网络', value: 483.1 }
+                    ],
+                    itemStyle: { borderRadius: 4, borderColor: '#fff', borderWidth: 2 },
+                    label: { show: false }
+                }]
+            });
+            // 月度趋势
+            echarts.init(document.getElementById('chart-trend')).setOption({
+                tooltip: { trigger: 'axis' },
+                legend: { data: ['CPU','GPU','存储','其他SAAS','网络'], bottom: 0 },
+                grid: { left: '3%', right: '4%', bottom: '20%', top: '8%', containLabel: true },
+                xAxis: { type: 'category', data: ['1月', '2月'] },
+                yAxis: { type: 'value', name: '万元' },
+                series: [
+                    { name: 'CPU',    type: 'line', smooth: true, data: [5207.7, 5000.9], itemStyle: { color: '#5470c6' } },
+                    { name: 'GPU',    type: 'line', smooth: true, data: [1614.5, 1628.3], itemStyle: { color: '#fac858' } },
+                    { name: '存储',   type: 'line', smooth: true, data: [1026.4, 1022.9], itemStyle: { color: '#91cc75' } },
+                    { name: '其他SAAS', type: 'line', smooth: true, data: [1443.9, 1924.0], itemStyle: { color: '#ee6666' } },
+                    { name: '网络',   type: 'line', smooth: true, data: [251.8, 231.3], itemStyle: { color: '#73c0de' } }
+                ]
+            });
+            // CPU
+            echarts.init(document.getElementById('chart-cpu')).setOption({
+                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+                grid: { left: '3%', right: '4%', bottom: '15%', top: '8%', containLabel: true },
+                xAxis: { type: 'category', data: ['Lambda','Larc','混部容器','RedKV','Kafka','Flink','Redis','通用型','计算型','EMR'], axisLabel: { rotate: 15 } },
+                yAxis: { type: 'value', name: '万元' },
+                series: [{ type: 'bar', barWidth: '60%', itemStyle: { color: '#5470c6' },
+                    data: [2420.6, 1694.6, 1511.7, 1215.5, 970.9, 801.4, 509.8, 459.3, 360.2, 189.5] }]
+            });
+            // GPU
+            echarts.init(document.getElementById('chart-gpu')).setOption({
+                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+                grid: { left: '3%', right: '4%', bottom: '10%', top: '8%', containLabel: true },
+                xAxis: { type: 'category', data: ['L20', 'H20', 'H20-141G', 'A10', '其他'] },
+                yAxis: { type: 'value', name: '万元' },
+                series: [{ type: 'bar', barWidth: '50%', itemStyle: { color: '#fac858' },
+                    data: [2035.7, 642.4, 441.4, 115.6, 7.7] }]
+            });
+            // 存储
+            echarts.init(document.getElementById('chart-storage')).setOption({
+                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+                grid: { left: '3%', right: '4%', bottom: '10%', top: '8%', containLabel: true },
+                xAxis: { type: 'category', data: ['标准存储', '增强型SSD', '通用型SSD', '基础盘', '归档存储'] },
+                yAxis: { type: 'value', name: '万元' },
+                series: [{ type: 'bar', barWidth: '50%', itemStyle: { color: '#91cc75' },
+                    data: [1222.1, 642.2, 129.6, 38.9, 16.5] }]
+            });
+            // SAAS
+            echarts.init(document.getElementById('chart-saas')).setOption({
+                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+                grid: { left: '3%', right: '4%', bottom: '20%', top: '8%', containLabel: true },
+                xAxis: { type: 'category', data: ['花果山','用户行为跟踪','Metrics指标','实验平台Racing','RocketMQ','可观测日志','Hologres','HBase'], axisLabel: { rotate: 20 } },
+                yAxis: { type: 'value', name: '万元' },
+                series: [{ type: 'bar', barWidth: '60%', itemStyle: { color: '#ee6666' },
+                    data: [2022.6, 786.3, 268.2, 96.9, 58.5, 55.6, 32.4, 18.3] }]
+            });
+            // 网络
+            echarts.init(document.getElementById('chart-network')).setOption({
+                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+                grid: { left: '3%', right: '4%', bottom: '10%', top: '8%', containLabel: true },
+                xAxis: { type: 'category', data: ['专线', 'RGW', '负载均衡'] },
+                yAxis: { type: 'value', name: '万元' },
+                series: [{ type: 'bar', barWidth: '40%', itemStyle: { color: '#73c0de' },
+                    data: [481.8, 1.1, 0.2] }]
+            });
+        }
+
+        // ======= ③ 优化测算图表 =======
+        function initOptimizeCharts() {
+            const baseline = (total1 + total2) / 2; // 月均 ~9,544万
+            echarts.init(document.getElementById('chart-march')).setOption({
+                tooltip: { trigger: 'axis' },
+                grid: { left: '3%', right: '4%', bottom: '10%', top: '15%', containLabel: true },
+                xAxis: { type: 'category', data: ['当前趋势', '优化后'] },
+                yAxis: { type: 'value', name: '万元' },
+                series: [{
+                    type: 'bar', barWidth: '50%',
+                    data: [{ value: 9807, itemStyle: { color: '#ee6666' } }, { value: 8441, itemStyle: { color: '#91cc75' } }],
+                    label: { show: true, position: 'top', formatter: v => v.value.toLocaleString() + '万' }
+                }]
+            });
+            // 全年逐月
+            const budgets = [748.8,771.6,792.0,813.2,833.3,853.6,876.3,894.9,903.4,923.5,939.0,954.1];
+            echarts.init(document.getElementById('chart-year')).setOption({
+                tooltip: { trigger: 'axis' },
+                legend: { data: ['预算（剔税）','当前趋势（含税）','优化后（含税）'], bottom: 0 },
+                grid: { left: '3%', right: '4%', bottom: '20%', top: '8%', containLabel: true },
+                xAxis: { type: 'category', data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'] },
+                yAxis: { type: 'value', name: '万元' },
+                series: [
+                    { name: '预算（剔税）', type: 'line', data: budgets, lineStyle: { type: 'dashed', color: '#999' }, itemStyle: { color: '#999' } },
+                    { name: '当前趋势（含税）', type: 'line', smooth: true, data: [9544,9807,9807,9807,9807,9807,9807,9807,9807,9807,9807,9807], itemStyle: { color: '#5470c6' } },
+                    { name: '优化后（含税）', type: 'line', smooth: true, data: [9544,9807,8441,8441,8441,8441,8441,8441,8441,8441,8441,8441], itemStyle: { color: '#91cc75' } }
+                ]
+            });
+            // 绑定滑块
+            updateOptResult();
+        }
+
+        // ======= 滑块联动 =======
+        function updateOptResult() {
+            const cpuR = +document.getElementById('slider-cpu').value / 100;
+            const gpuR = +document.getElementById('slider-gpu').value / 100;
+            const stoR = +document.getElementById('slider-storage').value / 100;
+            const saaR = +document.getElementById('slider-saas').value / 100;
+            const base = 9807;
+            const cpuBase = (BASE.cpu1 + BASE.cpu2) / 2;
+            const gpuBase = (BASE.gpu1 + BASE.gpu2) / 2;
+            const stoBase = (BASE.sto1 + BASE.sto2) / 2;
+            const saaBase = (BASE.saa1 + BASE.saa2) / 2;
+            const save = Math.round(cpuBase * cpuR + gpuBase * gpuR + stoBase * stoR + saaBase * saaR);
+            const after = Math.round(base - save);
+            document.getElementById('opt-save').textContent = save.toLocaleString() + ' 万元/月';
+            document.getElementById('opt-after').textContent = after.toLocaleString() + ' 万元';
+        }
+
+        ['cpu','gpu','storage','saas'].forEach(type => {
+            const s = document.getElementById('slider-' + type);
+            const v = document.getElementById('val-' + type);
+            s.addEventListener('input', () => {
+                v.textContent = s.value + '%';
+                if (initializedPages['optimize']) updateOptResult();
+            });
+        });
+
+        // 初始化第一个 Tab
+        initializedPages['budget'] = true;
+        initBudgetCharts();
     </script>
 </body>
 </html>
