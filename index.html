@@ -405,7 +405,31 @@
             }
         };
 
-        function initCharts() {
+        // 记录哪些 Tab 已初始化图表
+        const initializedPages = {};
+
+        function initPageCharts(page) {
+            if (initializedPages[page]) {
+                // 已初始化过，只需 resize
+                echarts.getInstanceByDom(document.getElementById('chart-' + page + '-first')) && 
+                    document.querySelectorAll('.chart').forEach(el => {
+                        const inst = echarts.getInstanceByDom(el);
+                        if (inst) inst.resize();
+                    });
+                return;
+            }
+            initializedPages[page] = true;
+
+            if (page === 'budget') {
+                initBudgetCharts();
+            } else if (page === 'usage') {
+                initUsageCharts();
+            } else if (page === 'optimize') {
+                initOptimizeCharts();
+            }
+        }
+
+        function initBudgetCharts() {
             echarts.init(document.getElementById('chart-monthly')).setOption({
                 tooltip:{trigger:'axis'},legend:{data:['预算','实际'],bottom:0},
                 grid:{left:'3%',right:'4%',bottom:'15%',top:'10%',containLabel:true},
@@ -416,7 +440,6 @@
                     {name:'实际',type:'bar',data:data.monthly.actual,itemStyle:{color:'#5470c6'}}
                 ]
             });
-
             echarts.init(document.getElementById('chart-efficiency')).setOption({
                 tooltip:{trigger:'axis'},
                 grid:{left:'3%',right:'4%',bottom:'10%',top:'15%',containLabel:true},
@@ -424,13 +447,14 @@
                 yAxis:{type:'value',name:'元/DAU',min:0.4,max:0.6},
                 series:[{type:'line',data:[0.49,0.44],smooth:true,areaStyle:{color:'rgba(84,112,198,0.1)'},itemStyle:{color:'#5470c6'},lineStyle:{width:3}}]
             });
+        }
 
+        function initUsageCharts() {
             echarts.init(document.getElementById('chart-pie')).setOption({
                 tooltip:{trigger:'item',formatter:'{b}: {c}亿元 ({d}%)'},
                 legend:{orient:'vertical',right:10,top:'center',itemWidth:10,itemHeight:10},
                 series:[{type:'pie',radius:['40%','65%'],center:['35%','50%'],data:data.components.names.map((n,i)=>({name:n,value:data.components.values[i]})),itemStyle:{borderRadius:4,borderColor:'#fff',borderWidth:2},label:{show:false}}]
             });
-
             echarts.init(document.getElementById('chart-trend')).setOption({
                 tooltip:{trigger:'axis'},legend:{data:['CPU','GPU','存储','其他SAAS','网络'],bottom:0},
                 grid:{left:'3%',right:'4%',bottom:'20%',top:'10%',containLabel:true},
@@ -443,54 +467,49 @@
                     {name:'网络',type:'line',smooth:true,data:[0.03,0.02]}
                 ]
             });
-
             echarts.init(document.getElementById('chart-cpu')).setOption({
                 tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
                 grid:{left:'3%',right:'4%',bottom:'15%',top:'10%',containLabel:true},
                 xAxis:{type:'category',data:data.cpuTypes.names,axisLabel:{rotate:20}},yAxis:{type:'value',name:'亿元'},
                 series:[{type:'bar',data:data.cpuTypes.values,itemStyle:{color:'#5470c6'},barWidth:'60%'}]
             });
-
             echarts.init(document.getElementById('chart-gpu')).setOption({
                 tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
                 grid:{left:'3%',right:'4%',bottom:'10%',top:'10%',containLabel:true},
                 xAxis:{type:'category',data:data.gpuTypes.names},yAxis:{type:'value',name:'亿元'},
                 series:[{type:'bar',data:data.gpuTypes.values,itemStyle:{color:'#fac858'},barWidth:'50%'}]
             });
-
             echarts.init(document.getElementById('chart-storage')).setOption({
                 tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
                 grid:{left:'3%',right:'4%',bottom:'15%',top:'10%',containLabel:true},
                 xAxis:{type:'category',data:data.storageTypes.names,axisLabel:{rotate:20}},yAxis:{type:'value',name:'亿元'},
                 series:[{type:'bar',data:data.storageTypes.values,itemStyle:{color:'#91cc75'},barWidth:'60%'}]
             });
-
             echarts.init(document.getElementById('chart-saas')).setOption({
                 tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
                 grid:{left:'3%',right:'4%',bottom:'20%',top:'10%',containLabel:true},
                 xAxis:{type:'category',data:data.saasTop.names,axisLabel:{rotate:30}},yAxis:{type:'value',name:'亿元'},
                 series:[{type:'bar',data:data.saasTop.values,itemStyle:{color:'#91cc75'},barWidth:'60%'}]
             });
-
             echarts.init(document.getElementById('chart-disk')).setOption({
                 tooltip:{trigger:'item'},
                 series:[{type:'pie',radius:['40%','65%'],data:[{name:'标准存储',value:0.12},{name:'增强型SSD',value:0.06},{name:'基础盘',value:0.02},{name:'通用型SSD',value:0.01}],itemStyle:{borderRadius:4,borderColor:'#fff',borderWidth:2}}]
             });
-
             echarts.init(document.getElementById('chart-network')).setOption({
                 tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
                 grid:{left:'3%',right:'4%',bottom:'10%',top:'10%',containLabel:true},
                 xAxis:{type:'category',data:data.networkTypes.names},yAxis:{type:'value',name:'亿元'},
                 series:[{type:'bar',data:data.networkTypes.values,itemStyle:{color:'#ee6666'},barWidth:'50%'}]
             });
+        }
 
+        function initOptimizeCharts() {
             echarts.init(document.getElementById('chart-march')).setOption({
                 tooltip:{trigger:'axis'},
                 grid:{left:'3%',right:'4%',bottom:'10%',top:'15%',containLabel:true},
                 xAxis:{type:'category',data:['当前趋势','优化后']},yAxis:{type:'value',name:'亿元'},
                 series:[{type:'bar',data:[1.07,0.91],itemStyle:{color:p=>p.dataIndex===0?'#ee6666':'#91cc75'},barWidth:'50%'}]
             });
-
             echarts.init(document.getElementById('chart-year')).setOption({
                 tooltip:{trigger:'axis'},legend:{data:['预算','当前趋势','优化后'],bottom:0},
                 grid:{left:'3%',right:'4%',bottom:'15%',top:'10%',containLabel:true},
@@ -515,7 +534,10 @@
                 document.querySelectorAll('.sub-tab').forEach(t=>t.classList.remove('active'));
                 tab.classList.add('active');
                 document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-                document.getElementById('page-'+tab.dataset.page).classList.add('active');
+                const page = tab.dataset.page;
+                document.getElementById('page-'+page).classList.add('active');
+                // 切换后初始化该 Tab 的图表
+                setTimeout(() => initPageCharts(page), 50);
             });
         });
 
@@ -524,7 +546,14 @@
             s.addEventListener('input',()=>v.textContent=s.value+'%');
         });
 
-        initCharts();
+        // 初始化第一个 Tab（预实对比）
+        initBudgetCharts();
+        window.addEventListener('resize', ()=>{
+            document.querySelectorAll('.chart').forEach(el=>{
+                const inst = echarts.getInstanceByDom(el);
+                if (inst) inst.resize();
+            });
+        });
     </script>
 </body>
 </html>
