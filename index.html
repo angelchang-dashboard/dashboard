@@ -196,11 +196,7 @@
         </div>
     </div>
 
-    <div class="nav-tabs">
-        <div class="nav-tab active" data-tab="recommend">推荐</div>
-        <div class="nav-tab" data-tab="search">搜索</div>
-        <div class="nav-tab" data-tab="community">社区</div>
-    </div>
+    <!-- 单一场景：推荐 -->
 
     <div class="sub-nav">
         <div class="sub-tab active" data-page="budget">① 预实对比</div>
@@ -212,23 +208,23 @@
         <div class="page active" id="page-budget">
             <div class="kpi-grid">
                 <div class="kpi-card">
-                    <div class="label">全年预算</div>
-                    <div class="value">66.00<span class="unit">亿元</span></div>
+                    <div class="label">全年预算（剔税）</div>
+                    <div class="value">10.30<span class="unit">亿元</span></div>
                 </div>
                 <div class="kpi-card">
-                    <div class="label">YTD 实际</div>
-                    <div class="value">11.13<span class="unit">亿元</span></div>
-                    <div class="change up">+1.63% 环比</div>
+                    <div class="label">YTD 实际（剔税）</div>
+                    <div class="value">1.63<span class="unit">亿元</span></div>
+                    <div class="change down">-7.74% 环比</div>
                 </div>
                 <div class="kpi-card">
                     <div class="label">预算执行率</div>
-                    <div class="value">16.86%</div>
+                    <div class="value">15.78%</div>
                     <div class="change">时间进度 16.67%</div>
                 </div>
                 <div class="kpi-card">
                     <div class="label">预计全年</div>
-                    <div class="value">66.78<span class="unit">亿元</span></div>
-                    <div class="change up">+1.18% 预算偏差</div>
+                    <div class="value">9.76<span class="unit">亿元</span></div>
+                    <div class="change up">-5.28% 预算偏差</div>
                 </div>
             </div>
 
@@ -258,8 +254,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>1月</td><td class="num">5.50</td><td class="num">5.52</td><td class="num">100.36%</td><td class="num">-</td><td class="num">1.72</td><td class="num">3.21</td></tr>
-                        <tr><td>2月</td><td class="num">5.50</td><td class="num">5.61</td><td class="num">102.00%</td><td class="num up">+1.63%</td><td class="num">1.76</td><td class="num">3.19</td></tr>
+                        <tr><td>1月</td><td class="num">0.75</td><td class="num">0.85</td><td class="num">112.94%</td><td class="num">-</td><td class="num">1.72</td><td class="num">0.49</td></tr>
+                        <tr><td>2月</td><td class="num">0.77</td><td class="num">0.78</td><td class="num">101.11%</td><td class="num down">-7.74%</td><td class="num">1.76</td><td class="num">0.44</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -360,9 +356,9 @@
                         <tr><th>方案</th><th>预计节省</th><th>实施难度</th><th>预期效果</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><span class="tag tag-blue">CPU 混部优化</span></td><td class="num">0.45 亿元/月</td><td>低</td><td>提升利用率 15%</td></tr>
-                        <tr><td><span class="tag tag-green">GPU 共享调度</span></td><td class="num">0.29 亿元/月</td><td>中</td><td>减少闲置 20%</td></tr>
-                        <tr><td><span class="tag tag-orange">存储分层</span></td><td class="num">0.12 亿元/月</td><td>低</td><td>冷数据降本 30%</td></tr>
+                        <tr><td><span class="tag tag-blue">CPU 混部优化</span></td><td class="num">0.07 亿元/月</td><td>低</td><td>提升利用率 15%</td></tr>
+                        <tr><td><span class="tag tag-green">GPU 共享调度</span></td><td class="num">0.02 亿元/月</td><td>中</td><td>减少闲置 20%</td></tr>
+                        <tr><td><span class="tag tag-orange">存储分层</span></td><td class="num">0.01 亿元/月</td><td>低</td><td>冷数据降本 30%</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -370,27 +366,33 @@
     </div>
 
     <script>
+        // 数据基于技术 booklet 规则计算
+        // 预算：26年预算 sheet，剔税 = 含税 / 1.06
+        // 实际：26年技术成本 sheet，剔税 = 含税 / 1.06
         const data = {
             monthly: {
                 months: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
-                budget: [5.5,5.5,5.5,5.5,5.5,5.5,5.5,5.5,5.5,5.5,5.5,5.5],
-                actual: [5.52,5.61,null,null,null,null,null,null,null,null,null,null]
+                // 预算（剔税）：0.7488, 0.7716, 0.7920, 0.8132, 0.8333, 0.8536, 0.8763, 0.8949, 0.9034, 0.9235, 0.9390, 0.9541
+                budget: [0.75,0.77,0.79,0.81,0.83,0.85,0.88,0.89,0.90,0.92,0.94,0.95],
+                // 实际（剔税）：1月0.8457, 2月0.7802
+                actual: [0.85,0.78,null,null,null,null,null,null,null,null,null,null]
             },
             components: {
-                names: ['CPU','GPU','存储','其他SAAS','云盘','网络'],
-                values: [5.12,1.06,0.41,1.09,0.26,0.15]
+                names: ['CPU','GPU','存储','SAAS','网络'],
+                // 1月+2月实际合计（剔税）
+                values: [0.98,0.31,0.14,0.19,0.01]
             },
             cpuTypes: {
-                names: ['独占容器','QS_AI平台-训练','混部容器','Lambda','Redis','Kafka','Flink','其他'],
-                values: [7.96,5.37,0.56,0.48,0.42,0.24,0.08,0.08]
+                names: ['独占容器','混部容器','Lambda','Redis','Kafka','Flink','其他'],
+                values: [0.85,0.05,0.03,0.02,0.01,0.01,0.01]
             },
             gpuTypes: {
-                names: ['L20','H20','H20-141G','Darwin GPU'],
-                values: [0.67,0.21,0.14,0.04]
+                names: ['L20','H20','H20-141G','其他'],
+                values: [0.20,0.07,0.04,0.00]
             },
             saasTop: {
-                names: ['花果山','用户行为跟踪','Metrics指标服务','实验平台Racing','Flink服务','EMR','MySQL','AI平台存储','RedKV','Redis'],
-                values: [0.39,0.21,0.45,0.24,0.08,0.59,0.42,0.27,1.26,0.72]
+                names: ['AI平台存储','Redis','EMR','MySQL','Metrics','实验平台','Flink','其他'],
+                values: [0.05,0.03,0.02,0.02,0.02,0.01,0.01,0.03]
             }
         };
 
@@ -410,8 +412,8 @@
                 tooltip:{trigger:'axis'},
                 grid:{left:'3%',right:'4%',bottom:'10%',top:'15%',containLabel:true},
                 xAxis:{type:'category',data:['1月','2月']},
-                yAxis:{type:'value',name:'元/万DAU',min:3,max:3.5},
-                series:[{type:'line',data:[3.21,3.19],smooth:true,areaStyle:{color:'rgba(84,112,198,0.1)'},itemStyle:{color:'#5470c6'},lineStyle:{width:3}}]
+                yAxis:{type:'value',name:'元/DAU',min:0.4,max:0.6},
+                series:[{type:'line',data:[0.49,0.44],smooth:true,areaStyle:{color:'rgba(84,112,198,0.1)'},itemStyle:{color:'#5470c6'},lineStyle:{width:3}}]
             });
 
             echarts.init(document.getElementById('chart-pie')).setOption({
@@ -421,10 +423,16 @@
             });
 
             echarts.init(document.getElementById('chart-trend')).setOption({
-                tooltip:{trigger:'axis'},legend:{data:['CPU','GPU','存储','其他SAAS','云盘','网络'],bottom:0},
+                tooltip:{trigger:'axis'},legend:{data:['CPU','GPU','存储','SAAS','网络'],bottom:0},
                 grid:{left:'3%',right:'4%',bottom:'20%',top:'10%',containLabel:true},
                 xAxis:{type:'category',data:['1月','2月']},yAxis:{type:'value',name:'亿元'},
-                series:['CPU','GPU','存储','其他SAAS','云盘','网络'].map((n,i)=>({name:n,type:'line',smooth:true,data:[[2.53,2.59],[0.53,0.53],[0.20,0.21],[0.47,0.62],[0.14,0.13],[0.08,0.08]][i]}))
+                series:[
+                    {name:'CPU',type:'line',smooth:true,data:[0.52,0.46]},
+                    {name:'GPU',type:'line',smooth:true,data:[0.17,0.14]},
+                    {name:'存储',type:'line',smooth:true,data:[0.08,0.06]},
+                    {name:'SAAS',type:'line',smooth:true,data:[0.10,0.09]},
+                    {name:'网络',type:'line',smooth:true,data:[0.01,0.00]}
+                ]
             });
 
             echarts.init(document.getElementById('chart-cpu')).setOption({
@@ -467,7 +475,7 @@
                 tooltip:{trigger:'axis'},
                 grid:{left:'3%',right:'4%',bottom:'10%',top:'15%',containLabel:true},
                 xAxis:{type:'category',data:['当前趋势','优化后']},yAxis:{type:'value',name:'亿元'},
-                series:[{type:'bar',data:[5.61,4.95],itemStyle:{color:p=>p.dataIndex===0?'#ee6666':'#91cc75'},barWidth:'50%'}]
+                series:[{type:'bar',data:[0.78,0.66],itemStyle:{color:p=>p.dataIndex===0?'#ee6666':'#91cc75'},barWidth:'50%'}]
             });
 
             echarts.init(document.getElementById('chart-year')).setOption({
@@ -476,8 +484,8 @@
                 xAxis:{type:'category',data:data.monthly.months},yAxis:{type:'value',name:'亿元'},
                 series:[
                     {name:'预算',type:'line',data:data.monthly.budget,lineStyle:{type:'dashed',color:'#999'},itemStyle:{color:'#999'}},
-                    {name:'当前趋势',type:'line',smooth:true,data:[5.52,5.61,5.61,5.61,5.61,5.61,5.61,5.61,5.61,5.61,5.61,5.61],itemStyle:{color:'#5470c6'}},
-                    {name:'优化后',type:'line',smooth:true,data:[5.52,5.61,4.95,4.95,4.95,4.95,4.95,4.95,4.95,4.95,4.95,4.95],itemStyle:{color:'#91cc75'}}
+                    {name:'当前趋势',type:'line',smooth:true,data:[0.85,0.78,0.78,0.78,0.78,0.78,0.78,0.78,0.78,0.78,0.78,0.78],itemStyle:{color:'#5470c6'}},
+                    {name:'优化后',type:'line',smooth:true,data:[0.85,0.78,0.66,0.66,0.66,0.66,0.66,0.66,0.66,0.66,0.66,0.66],itemStyle:{color:'#91cc75'}}
                 ]
             });
         }
