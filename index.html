@@ -377,22 +377,31 @@
                 // 实际（剔税）：1月0.8457, 2月0.7802
                 actual: [0.85,0.78,null,null,null,null,null,null,null,null,null,null]
             },
+            // 用量分析数据：中台含税口径（技术 booklet 26年技术成本 sheet）
             components: {
-                names: ['CPU','GPU','存储','SAAS','网络'],
-                // 1月+2月实际合计（剔税）
-                values: [0.98,0.31,0.14,0.19,0.01]
+                names: ['CPU','GPU','存储','其他SAAS','网络'],
+                // 1月+2月实际合计（亿元）
+                values: [1.25,0.02,0.24,0.16,0.05]
             },
             cpuTypes: {
-                names: ['独占容器','混部容器','Lambda','Redis','Kafka','Flink','其他'],
-                values: [0.85,0.05,0.03,0.02,0.01,0.01,0.01]
+                names: ['Lambda','Larc训练','混部容器','RedKV','独占容器','Flink','Redis','EMR','其他'],
+                values: [0.37,0.31,0.22,0.11,0.09,0.08,0.05,0.01,0.01]
             },
             gpuTypes: {
-                names: ['L20','H20','H20-141G','其他'],
-                values: [0.20,0.07,0.04,0.00]
+                names: ['L20','H20','H20-141G'],
+                values: [0.011,0.003,0.002]
+            },
+            storageTypes: {
+                names: ['AI平台存储','Red Kafka','Lindorm','对象存储','其他'],
+                values: [0.10,0.10,0.03,0.02,0.00]
             },
             saasTop: {
-                names: ['AI平台存储','Redis','EMR','MySQL','Metrics','实验平台','Flink','其他'],
-                values: [0.05,0.03,0.02,0.02,0.02,0.01,0.01,0.03]
+                names: ['用户行为跟踪','花果山','Metrics指标','实验平台Racing','RocketMQ','Hologres','可观测日志','其他'],
+                values: [0.07,0.04,0.03,0.01,0.01,0.01,0.01,0.00]
+            },
+            networkTypes: {
+                names: ['混合云网络','接入网关','负载均衡'],
+                values: [0.05,0.00,0.00]
             }
         };
 
@@ -423,22 +432,22 @@
             });
 
             echarts.init(document.getElementById('chart-trend')).setOption({
-                tooltip:{trigger:'axis'},legend:{data:['CPU','GPU','存储','SAAS','网络'],bottom:0},
+                tooltip:{trigger:'axis'},legend:{data:['CPU','GPU','存储','其他SAAS','网络'],bottom:0},
                 grid:{left:'3%',right:'4%',bottom:'20%',top:'10%',containLabel:true},
                 xAxis:{type:'category',data:['1月','2月']},yAxis:{type:'value',name:'亿元'},
                 series:[
-                    {name:'CPU',type:'line',smooth:true,data:[0.52,0.46]},
-                    {name:'GPU',type:'line',smooth:true,data:[0.17,0.14]},
-                    {name:'存储',type:'line',smooth:true,data:[0.08,0.06]},
-                    {name:'SAAS',type:'line',smooth:true,data:[0.10,0.09]},
-                    {name:'网络',type:'line',smooth:true,data:[0.01,0.00]}
+                    {name:'CPU',type:'line',smooth:true,data:[0.65,0.60]},
+                    {name:'GPU',type:'line',smooth:true,data:[0.008,0.008]},
+                    {name:'存储',type:'line',smooth:true,data:[0.13,0.11]},
+                    {name:'其他SAAS',type:'line',smooth:true,data:[0.08,0.08]},
+                    {name:'网络',type:'line',smooth:true,data:[0.03,0.02]}
                 ]
             });
 
             echarts.init(document.getElementById('chart-cpu')).setOption({
                 tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
                 grid:{left:'3%',right:'4%',bottom:'10%',top:'10%',containLabel:true},
-                xAxis:{type:'category',data:data.cpuTypes.names},yAxis:{type:'value',name:'亿元'},
+                xAxis:{type:'category',data:data.cpuTypes.names,axisLabel:{rotate:15}},yAxis:{type:'value',name:'亿元'},
                 series:[{type:'bar',data:data.cpuTypes.values,itemStyle:{color:'#5470c6'},barWidth:'50%'}]
             });
 
@@ -450,8 +459,10 @@
             });
 
             echarts.init(document.getElementById('chart-storage')).setOption({
-                tooltip:{trigger:'item'},
-                series:[{type:'pie',radius:['40%','65%'],data:[{name:'标准存储',value:0.40},{name:'低频存储',value:0.01}],itemStyle:{borderRadius:4,borderColor:'#fff',borderWidth:2}}]
+                tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+                grid:{left:'3%',right:'4%',bottom:'10%',top:'10%',containLabel:true},
+                xAxis:{type:'category',data:data.storageTypes.names,axisLabel:{rotate:15}},yAxis:{type:'value',name:'亿元'},
+                series:[{type:'bar',data:data.storageTypes.values,itemStyle:{color:'#91cc75'},barWidth:'50%'}]
             });
 
             echarts.init(document.getElementById('chart-saas')).setOption({
@@ -463,19 +474,21 @@
 
             echarts.init(document.getElementById('chart-disk')).setOption({
                 tooltip:{trigger:'item'},
-                series:[{type:'pie',radius:['40%','65%'],data:[{name:'增强型SSD',value:0.20},{name:'通用型SSD',value:0.06}],itemStyle:{borderRadius:4,borderColor:'#fff',borderWidth:2}}]
+                series:[{type:'pie',radius:['40%','65%'],data:[{name:'AI平台存储',value:0.10},{name:'Red Kafka',value:0.10},{name:'Lindorm',value:0.03},{name:'对象存储',value:0.02}],itemStyle:{borderRadius:4,borderColor:'#fff',borderWidth:2}}]
             });
 
             echarts.init(document.getElementById('chart-network')).setOption({
-                tooltip:{trigger:'item'},
-                series:[{type:'pie',radius:['40%','65%'],data:[{name:'专线',value:0.15},{name:'公网',value:0.01}],itemStyle:{borderRadius:4,borderColor:'#fff',borderWidth:2}}]
+                tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+                grid:{left:'3%',right:'4%',bottom:'10%',top:'10%',containLabel:true},
+                xAxis:{type:'category',data:data.networkTypes.names},yAxis:{type:'value',name:'亿元'},
+                series:[{type:'bar',data:data.networkTypes.values,itemStyle:{color:'#ee6666'},barWidth:'50%'}]
             });
 
             echarts.init(document.getElementById('chart-march')).setOption({
                 tooltip:{trigger:'axis'},
                 grid:{left:'3%',right:'4%',bottom:'10%',top:'15%',containLabel:true},
                 xAxis:{type:'category',data:['当前趋势','优化后']},yAxis:{type:'value',name:'亿元'},
-                series:[{type:'bar',data:[0.78,0.66],itemStyle:{color:p=>p.dataIndex===0?'#ee6666':'#91cc75'},barWidth:'50%'}]
+                series:[{type:'bar',data:[0.83,0.71],itemStyle:{color:p=>p.dataIndex===0?'#ee6666':'#91cc75'},barWidth:'50%'}]
             });
 
             echarts.init(document.getElementById('chart-year')).setOption({
@@ -484,8 +497,8 @@
                 xAxis:{type:'category',data:data.monthly.months},yAxis:{type:'value',name:'亿元'},
                 series:[
                     {name:'预算',type:'line',data:data.monthly.budget,lineStyle:{type:'dashed',color:'#999'},itemStyle:{color:'#999'}},
-                    {name:'当前趋势',type:'line',smooth:true,data:[0.85,0.78,0.78,0.78,0.78,0.78,0.78,0.78,0.78,0.78,0.78,0.78],itemStyle:{color:'#5470c6'}},
-                    {name:'优化后',type:'line',smooth:true,data:[0.85,0.78,0.66,0.66,0.66,0.66,0.66,0.66,0.66,0.66,0.66,0.66],itemStyle:{color:'#91cc75'}}
+                    {name:'当前趋势',type:'line',smooth:true,data:[0.90,0.83,0.83,0.83,0.83,0.83,0.83,0.83,0.83,0.83,0.83,0.83],itemStyle:{color:'#5470c6'}},
+                    {name:'优化后',type:'line',smooth:true,data:[0.90,0.83,0.71,0.71,0.71,0.71,0.71,0.71,0.71,0.71,0.71,0.71],itemStyle:{color:'#91cc75'}}
                 ]
             });
         }
